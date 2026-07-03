@@ -1,0 +1,14 @@
+[
+  {
+    "key": "KEYCLOAK_HOSTNAME",
+    "isOptional": false,
+    "defaultValue": "https://your-project.up.railway.app",
+    "description": "Public hostname used by Keycloak (e.g. your-app.up.railway.app). Set from Railway dashboard after deployment."
+  },
+  {
+    "key": "KEYCLOAK_ADMIN_PASSWORD",
+    "isOptional": false,
+    "defaultValue": "changeme123456",
+    "description": "Admin password for the initial Keycloak admin account. Must be at least 12 characters."
+  }
+]
