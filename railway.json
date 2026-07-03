@@ -10,7 +10,7 @@
       "settings": {
         "lifecycle": "STARTUP",
         "restartPolicyType": "ALWAYS",
-        "startCommand": "/opt/keycloak/bin/kc.sh start --http-port=8080",
+        "startCommand": "/opt/keycloak/bin/kc.sh start",
         "healthcheckPath": "/health/ready"
       },
       "deploy": {
@@ -20,9 +20,5 @@
         "healthCheckTimeout": 180
       }
     }
-  ],
-  "source": {
-    "type": "dockerfile",
-    "dockerfilePath": "Dockerfile"
-  }
+  ]
 }
