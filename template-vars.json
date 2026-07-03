@@ -1,14 +1,44 @@
 [
-  {
-    "key": "KEYCLOAK_HOSTNAME",
-    "isOptional": false,
-    "defaultValue": "https://your-project.up.railway.app",
-    "description": "Public hostname used by Keycloak (e.g. your-app.up.railway.app). Set from Railway dashboard after deployment."
-  },
-  {
-    "key": "KEYCLOAK_ADMIN_PASSWORD",
-    "isOptional": false,
-    "defaultValue": "changeme123456",
-    "description": "Admin password for the initial Keycloak admin account. Must be at least 12 characters."
-  }
+    {
+        "name": "DB_TYPE",
+        "description": "Database engine for Keycloak (postgres or sqlite)",
+        "defaultValue": "postgres",
+        "isOptional": true,
+        "requiredForTemplateDeployment": false
+    },
+    {
+        "name": "KC_PROXY",
+        "description": "Proxy header mode: 'edge' for Railway's terminate-all-TLS proxy, 'passthrough' when behind another TLS terminator",
+        "defaultValue": "edge",
+        "isOptional": true,
+        "requiredForTemplateDeployment": false
+    },
+    {
+        "name": "KC_HTTP_ENABLED",
+        "description": "Set true to enable Keycloak HTTP mode (default port 8080); set false for HTTPS mode (port 8443)",
+        "defaultValue": "true",
+        "isOptional": true,
+        "requiredForTemplateDeployment": false
+    },
+    {
+        "name": "KEYCLOAK_ADMIN_USERNAME",
+        "description": "Initial admin username for Keycloak Admin Console login",
+        "defaultValue": "admin",
+        "isOptional": false,
+        "requiredForTemplateDeployment": true
+    },
+    {
+        "name": "KEYCLOAK_ADMIN_PASSWORD",
+        "description": "Initial admin password. Must be at least 12 characters.",
+        "defaultValue": "changeme123456789",
+        "isOptional": false,
+        "requiredForTemplateDeployment": true
+    },
+    {
+        "name": "KEYCLOAK_HOSTNAME",
+        "description": "The public hostname of the deployed Keycloak instance (without protocol)",
+        "defaultValue": "",
+        "isOptional": true,
+        "requiredForTemplateDeployment": false
+    }
 ]
