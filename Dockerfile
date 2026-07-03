@@ -17,7 +17,7 @@ LABEL org.opencontainers.image.title="Keycloak" \
       org.opencontainers.image.created="${BUILD_YEAR}-07-03T00:00:00Z"
 
 ENV KC_DB=dev-file \
-    KC_HOSTNAME=localhost \
+    KC_PROXY=edge \
     KC_HTTP_ENABLED=true \
     KC_LOG_LEVEL=info \
     KC_METRICS_ENABLED=false \
