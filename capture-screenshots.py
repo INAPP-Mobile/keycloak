@@ -7,7 +7,7 @@ os.makedirs(PLAYWRIGHT_DIR, exist_ok=True)
 
 from playwright.sync_api import sync_playwright
 
-DOMAIN = "https://keycloak-production-35e0.up.railway.app"
+DOMAIN = "http://keycloak-production-18bb.up.railway.app"
 
 SCREENSHOTS = [
     {

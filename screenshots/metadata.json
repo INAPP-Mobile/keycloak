@@ -2,7 +2,7 @@
   {
     "label": "Admin Console Login",
     "status": 200,
-    "content_length": 3906,
+    "content_length": 3647,
     "title": "Keycloak Administration Console",
     "filename": "screenshots/01-admin-console.png",
     "path": "/var/home/ihshim523/Work/railway/railway-keycloak/screenshots/01-admin-console.png"
@@ -10,7 +10,7 @@
   {
     "label": "Account/Service Console",
     "status": 200,
-    "content_length": 4393,
+    "content_length": 4409,
     "title": "Account Management",
     "filename": "screenshots/02-account-page.png",
     "path": "/var/home/ihshim523/Work/railway/railway-keycloak/screenshots/02-account-page.png"
@@ -18,7 +18,7 @@
   {
     "label": "Root Landing Page (redirect to Admin)",
     "status": 200,
-    "content_length": 3906,
+    "content_length": 3902,
     "title": "Keycloak Administration Console",
     "filename": "screenshots/03-root-landing.png",
     "path": "/var/home/ihshim523/Work/railway/railway-keycloak/screenshots/03-root-landing.png"
