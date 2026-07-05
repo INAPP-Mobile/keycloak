@@ -35,4 +35,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=5 \
 
 EXPOSE 8080
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start-dev"]
+
+
+
+
