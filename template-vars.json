@@ -1,44 +1,62 @@
-[
-    {
-        "name": "DB_TYPE",
-        "description": "Database engine for Keycloak (postgres or sqlite)",
-        "defaultValue": "postgres",
-        "isOptional": true,
-        "requiredForTemplateDeployment": false
-    },
-    {
-        "name": "KC_PROXY",
-        "description": "Proxy header mode: 'edge' for Railway's terminate-all-TLS proxy, 'passthrough' when behind another TLS terminator",
-        "defaultValue": "edge",
-        "isOptional": true,
-        "requiredForTemplateDeployment": false
-    },
-    {
-        "name": "KC_HTTP_ENABLED",
-        "description": "Set true to enable Keycloak HTTP mode (default port 8080); set false for HTTPS mode (port 8443)",
-        "defaultValue": "true",
-        "isOptional": true,
-        "requiredForTemplateDeployment": false
-    },
-    {
-        "name": "KEYCLOAK_ADMIN_USERNAME",
-        "description": "Initial admin username for Keycloak Admin Console login",
-        "defaultValue": "admin",
-        "isOptional": false,
-        "requiredForTemplateDeployment": true
-    },
-    {
-        "name": "KEYCLOAK_ADMIN_PASSWORD",
-        "description": "Initial admin password. Must be at least 12 characters.",
-        "defaultValue": "changeme123456789",
-        "isOptional": false,
-        "requiredForTemplateDeployment": true
-    },
-    {
-        "name": "KEYCLOAK_HOSTNAME",
-        "description": "The public hostname of the deployed Keycloak instance (without protocol)",
-        "defaultValue": "",
-        "isOptional": true,
-        "requiredForTemplateDeployment": false
-    }
-]
+{
+  "DB_TYPE": {
+    "defaultValue": "postgres          # postgres | sqlite (use postgres for production)",
+    "description": "Configuration for DB_TYPE",
+    "isOptional": false
+  },
+  "PG_HOSTNAME": {
+    "defaultValue": "",
+    "description": "Configuration for PG_HOSTNAME",
+    "isOptional": true
+  },
+  "PG_PORT": {
+    "defaultValue": "5432",
+    "description": "Configuration for PG_PORT",
+    "isOptional": false
+  },
+  "PG_DATABASE": {
+    "defaultValue": "keycloak",
+    "description": "Configuration for PG_DATABASE",
+    "isOptional": false
+  },
+  "PG_USERNAME": {
+    "defaultValue": "keycloak",
+    "description": "Configuration for PG_USERNAME",
+    "isOptional": false
+  },
+  "PG_PASSWORD": {
+    "defaultValue": "${{secret(32)}}",
+    "description": "Configuration for PG_PASSWORD",
+    "isOptional": false
+  },
+  "KEYCLOAK_ADMIN_USERNAME": {
+    "defaultValue": "${{secret(32)}}",
+    "description": "Configuration for KEYCLOAK_ADMIN_USERNAME",
+    "isOptional": false
+  },
+  "KEYCLOAK_ADMIN_PASSWORD": {
+    "defaultValue": "${{secret(32)}}",
+    "description": "Configuration for KEYCLOAK_ADMIN_PASSWORD",
+    "isOptional": false
+  },
+  "KC_PROXY": {
+    "defaultValue": "edge             # edge = terminate TLS externally; pass-through when behind proxy",
+    "description": "Configuration for KC_PROXY",
+    "isOptional": false
+  },
+  "KC_HTTP_ENABLED": {
+    "defaultValue": "false     # set true for development, false for production with reverse proxy",
+    "description": "Configuration for KC_HTTP_ENABLED",
+    "isOptional": false
+  },
+  "KEYCLOAK_HOSTNAME": {
+    "defaultValue": "${{secret(32)}}",
+    "description": "Configuration for KEYCLOAK_HOSTNAME",
+    "isOptional": false
+  },
+  "PORT": {
+    "defaultValue": "8080",
+    "description": "Port the service listens on",
+    "isOptional": true
+  }
+}
