@@ -6,52 +6,52 @@
   },
   "PG_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "PostgreSQL server hostname for data persistence",
+    "description": "Hostname for PG_HOSTNAME",
     "isOptional": true
   },
   "PG_PORT": {
     "defaultValue": "5432",
-    "description": "PostgreSQL server port number (default: 5432)",
+    "description": "Port number for PG_PORT",
     "isOptional": true
   },
   "PG_DATABASE": {
     "defaultValue": "railway",
-    "description": "PostgreSQL database name for Keycloak data (default: keycloak)",
+    "description": "Pg Database",
     "isOptional": true
   },
   "PG_USERNAME": {
     "defaultValue": "railway",
-    "description": "Username with access to Keycloak's database schema",
+    "description": "Pg Username",
     "isOptional": true
   },
   "PG_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password for the PostgreSQL database user account",
+    "description": "Password credential for PG_PASSWORD",
     "isOptional": false
   },
   "KEYCLOAK_ADMIN_USERNAME": {
     "defaultValue": "admin",
-    "description": "Master realm initial admin username (default: admin)",
+    "description": "Keycloak Admin Username",
     "isOptional": true
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Master realm admin password for initial setup only",
+    "description": "Password credential for KEYCLOAK_ADMIN_PASSWORD",
     "isOptional": false
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Proxy mode: edge, passthrough, or reencrypt (default: edge)",
+    "description": "Kc Proxy",
     "isOptional": true
   },
   "KC_HTTP_ENABLED": {
     "defaultValue": "false",
-    "description": "Enable HTTP listener (default: true; set false for HTTPS-only)",
+    "description": "Kc Http Enabled",
     "isOptional": true
   },
   "KEYCLOAK_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Public hostname URL for Keycloak access and tokens",
+    "description": "Hostname for KEYCLOAK_HOSTNAME",
     "isOptional": true
   },
   "PORT": {
