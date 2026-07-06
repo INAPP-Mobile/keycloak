@@ -6,52 +6,52 @@
   },
   "PG_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Hostname for PG_HOSTNAME",
+    "description": "PostgreSQL server hostname (companion DB or localhost)",
     "isOptional": true
   },
   "PG_PORT": {
     "defaultValue": "5432",
-    "description": "Port number for PG_PORT",
+    "description": "PostgreSQL port number (default: 5432)",
     "isOptional": true
   },
   "PG_DATABASE": {
     "defaultValue": "railway",
-    "description": "Pg Database",
+    "description": "Name of the PostgreSQL database for Keycloak",
     "isOptional": true
   },
   "PG_USERNAME": {
     "defaultValue": "railway",
-    "description": "Pg Username",
+    "description": "Database username for Keycloak connections",
     "isOptional": true
   },
   "PG_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for PG_PASSWORD",
+    "description": "Password for PostgreSQL user connection",
     "isOptional": false
   },
   "KEYCLOAK_ADMIN_USERNAME": {
     "defaultValue": "admin",
-    "description": "Keycloak Admin Username",
+    "description": "Initial admin username; change via Admin UI later",
     "isOptional": true
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for KEYCLOAK_ADMIN_PASSWORD",
+    "description": "Initial admin password; used first startup only",
     "isOptional": false
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Kc Proxy",
+    "description": "Proxy mode: edge (Railway), passthrough, or reencrypt",
     "isOptional": true
   },
   "KC_HTTP_ENABLED": {
     "defaultValue": "false",
-    "description": "Kc Http Enabled",
+    "description": "Enable HTTP listener (HTTPS only recommended for Railway)",
     "isOptional": true
   },
   "KEYCLOAK_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Hostname for KEYCLOAK_HOSTNAME",
+    "description": "Public URL users will access Keycloak at (match your domain)",
     "isOptional": true
   },
   "PORT": {
