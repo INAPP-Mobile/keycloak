@@ -1,6 +1,6 @@
 # Deploy and Host Keycloak on Railway
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/railway-keycloak)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/keycloak)
 
 Keycloak is an open-source identity and access management (IAM) solution developed by Red Hat. It provides single sign-on (SSO), social login, OIDC/OAuth 2.0/SAML authentication, and centralized user management — all in a single Docker container on Railway.
 
