@@ -1,6 +1,6 @@
 {
   "slug": "keycloak",
-  "template_code": "keycloak-1",
-  "teardown_at": "2026-07-06T02:19:53.681870",
+  "template_code": "keycloak-2",
+  "teardown_at": "2026-07-06T02:25:04.304907",
   "status": "completed"
 }
