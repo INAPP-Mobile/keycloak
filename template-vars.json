@@ -6,52 +6,52 @@
   },
   "PG_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Hostname of the PostgreSQL server (defaults to localhost if not specified)",
+    "description": "PostgreSQL server hostname (e.g., postgres-service from Docker Compose).",
     "isOptional": true
   },
   "PG_PORT": {
     "defaultValue": "5432",
-    "description": "Port number of the PostgreSQL server (default: 5432)",
+    "description": "Port for PostgreSQL service (default: 5432).",
     "isOptional": true
   },
   "PG_DATABASE": {
     "defaultValue": "railway",
-    "description": "PostgreSQL database name for Keycloak (e.g., keycloak)",
+    "description": "PostgreSQL database name for Keycloak storage (default: keycloak).",
     "isOptional": true
   },
   "PG_USERNAME": {
     "defaultValue": "railway",
-    "description": "Username used to connect to the PostgreSQL database",
+    "description": "Username for PostgreSQL database access (default: keycloak).",
     "isOptional": true
   },
   "PG_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password for connecting to the PostgreSQL database",
+    "description": "Password for PostgreSQL user. Required when connecting to production database.",
     "isOptional": false
   },
   "KEYCLOAK_ADMIN_USERNAME": {
     "defaultValue": "admin",
-    "description": "Initial admin username for Keycloak master realm (used only on first startup)",
+    "description": "Initial admin username for master realm (default: admin).",
     "isOptional": true
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Initial admin password for Keycloak master realm (used only on first startup)",
+    "description": "Initial admin password set on first startup. Change via Admin UI after setup.",
     "isOptional": false
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Proxy mode: edge for Railway TLS termination, passthrough, or reencrypt",
+    "description": "Proxy configuration: edge=Railway TLS, passthrough/reencrypt options.",
     "isOptional": true
   },
   "KC_HTTP_ENABLED": {
     "defaultValue": "false",
-    "description": "Enable plain HTTP listener; set false for HTTPS-only in most Railway deployments",
+    "description": "Enable HTTP listener (true/false). Default true in dev mode.",
     "isOptional": true
   },
   "KEYCLOAK_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Public URL for accessing Keycloak; must match Railway or custom domain",
+    "description": "Public hostname for Keycloak access. Must match Railway domain or custom domain.",
     "isOptional": true
   },
   "PORT": {
