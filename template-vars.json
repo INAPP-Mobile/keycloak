@@ -6,17 +6,17 @@
   },
   "PG_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Hostname for PG_HOSTNAME",
+    "description": "Hostname or IP address of the PostgreSQL server to connect to.",
     "isOptional": true
   },
   "PG_PORT": {
     "defaultValue": "5432",
-    "description": "Port number for PG_PORT",
+    "description": "Port number for PostgreSQL server. Default: 5432",
     "isOptional": true
   },
   "PG_DATABASE": {
     "defaultValue": "railway",
-    "description": "Pg Database",
+    "description": "Name of PostgreSQL database for Keycloak data storage.",
     "isOptional": true
   },
   "PG_USERNAME": {
@@ -26,32 +26,32 @@
   },
   "PG_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for PG_PASSWORD",
+    "description": "Password for PostgreSQL user authentication (required).",
     "isOptional": false
   },
   "KEYCLOAK_ADMIN_USERNAME": {
     "defaultValue": "admin",
-    "description": "Keycloak Admin Username",
+    "description": "Initial admin username for master realm. Default: admin",
     "isOptional": true
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for KEYCLOAK_ADMIN_PASSWORD",
+    "description": "Initial password for admin user on first Keycloak startup only.",
     "isOptional": false
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Kc Proxy",
+    "description": "Proxy mode: edge (Railway), passthrough, or reencrypt",
     "isOptional": true
   },
   "KC_HTTP_ENABLED": {
     "defaultValue": "false",
-    "description": "Kc Http Enabled",
+    "description": "Enable/Disable plaintext HTTP listener (typically false for Railway)",
     "isOptional": true
   },
   "KEYCLOAK_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Hostname for KEYCLOAK_HOSTNAME",
+    "description": "Public hostname/URL users access Keycloak at (must match Railway domain)",
     "isOptional": true
   },
   "PORT": {
