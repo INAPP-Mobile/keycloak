@@ -43,7 +43,7 @@
   <strong>Tip:</strong> If the bookmarklet doesn't fill all fields, use the Copy buttons below.
 </div>
 
-<a class="bookmarklet-link" href="javascript:(function(){ var d={&quot;DB_TYPE&quot;: {&quot;defaultValue&quot;: &quot;postgres&quot;, &quot;description&quot;: &quot;Database engine: postgres for production, sqlite for local dev&quot;, &quot;isOptional&quot;: true}, &quot;PG_HOSTNAME&quot;: {&quot;defaultValue&quot;: &quot;localhost&quot;, &quot;description&quot;: &quot;Hostname or IP address of the PostgreSQL server to connect to.&quot;, &quot;isOptional&quot;: true}, &quot;PG_PORT&quot;: {&quot;defaultValue&quot;: &quot;5432&quot;, &quot;description&quot;: &quot;Port number for PostgreSQL server. Default: 5432&quot;, &quot;isOptional&quot;: true}, &quot;PG_DATABASE&quot;: {&quot;defaultValue&quot;: &quot;railway&quot;, &quot;description&quot;: &quot;Name of PostgreSQL database for Keycloak data storage.&quot;, &quot;isOptional&quot;: true}, &quot;PG_USERNAME&quot;: {&quot;defaultValue&quot;: &quot;railway&quot;, &quot;description&quot;: &quot;Pg Username&quot;, &quot;isOptional&quot;: true}, &quot;PG_PASSWORD&quot;: {&quot;defaultValue&quot;: &quot;${{secret(32)}}&quot;, &quot;description&quot;: &quot;Password for PostgreSQL user authentication (required).&quot;, &quot;isOptional&quot;: false}, &quot;KEYCLOAK_ADMIN_USERNAME&quot;: {&quot;defaultValue&quot;: &quot;admin&quot;, &quot;description&quot;: &quot;Initial admin username for master realm. Default: admin&quot;, &quot;isOptional&quot;: true}, &quot;KEYCLOAK_ADMIN_PASSWORD&quot;: {&quot;defaultValue&quot;: &quot;${{secret(32)}}&quot;, &quot;description&quot;: &quot;Initial password for admin user on first Keycloak startup only.&quot;, &quot;isOptional&quot;: false}, &quot;KC_PROXY&quot;: {&quot;defaultValue&quot;: &quot;edge&quot;, &quot;description&quot;: &quot;Proxy mode: edge (Railway), passthrough, or reencrypt&quot;, &quot;isOptional&quot;: true}, &quot;KC_HTTP_ENABLED&quot;: {&quot;defaultValue&quot;: &quot;false&quot;, &quot;description&quot;: &quot;Enable/Disable plaintext HTTP listener (typically false for Railway)&quot;, &quot;isOptional&quot;: true}, &quot;KEYCLOAK_HOSTNAME&quot;: {&quot;defaultValue&quot;: &quot;localhost&quot;, &quot;description&quot;: &quot;Public hostname/URL users access Keycloak at (must match Railway domain)&quot;, &quot;isOptional&quot;: true}, &quot;PORT&quot;: {&quot;defaultValue&quot;: &quot;8080&quot;, &quot;description&quot;: &quot;Port the service listens on inside the container&quot;, &quot;isOptional&quot;: true}}; var f=0;var s=new Set(); function setVal(inp,v){ var p=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value'); var t=Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value'); var setter=p&&p.set?p.set:(t&&t.set?t.set:null); if(setter){setter.call(inp,v);}else{inp.value=v;} inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true})); } function fillRow(row,vn,cfg){ var inputs=row.querySelectorAll('input:not([type=&quot;hidden&quot;]),textarea'); var dc=false,df=false; for(var inp of inputs){ if(s.has(inp))continue; var ph=(inp.placeholder||'').toLowerCase(); var al=(inp.getAttribute('aria-label')||'').toLowerCase(); var nm=(inp.name||'').toLowerCase(); var id=(inp.id||'').toLowerCase(); var lbl=''; var lp=(inp.closest&&inp.closest('label'))||(inp.id&&document.querySelector('label[for=&quot;'+inp.id+'&quot;]')); if(lp)lbl=lp.textContent.toLowerCase(); if(!lbl&&inp.closest){ var pa=inp.closest('div,li,fieldset,section'); if(pa){var nl=pa.querySelector('label,span[class*=&quot;label&quot;],div[class*=&quot;label&quot;],strong');if(nl)lbl=nl.textContent.toLowerCase();} } // Description field detection if(!dc&&cfg.description&&( ph.includes('desc')||al.includes('desc')||lbl.includes('desc')|| nm.includes('desc')||id.includes('desc') )){setVal(inp,cfg.description);s.add(inp);dc=true;f++;} // Default value field detection else if(!df&&cfg.defaultValue&&!cfg.defaultValue.startsWith('${{')&&( ph.includes('default')||ph.includes('value')||al.includes('default')|| al.includes('value')||lbl.includes('default')||lbl.includes('value')|| nm.includes('default')||nm.includes('value')||id.includes('default')||id.includes('value') )){setVal(inp,cfg.defaultValue);s.add(inp);df=true;f++;} // Ordinal fallback: first input=description, second=default else if(!dc&&cfg.description){setVal(inp,cfg.description);s.add(inp);dc=true;f++;} else if(!df&&cfg.defaultValue&&!cfg.defaultValue.startsWith('${{')){setVal(inp,cfg.defaultValue);s.add(inp);df=true;f++;} } } function tryFill(vn,cfg){ // Strategy 1: Find variable name in headings/labels var sel='h1,h2,h3,h4,h5,h6,label,strong,th,dt'; sel+=',span[class*=&quot;name&quot;],div[class*=&quot;name&quot;],div[class*=&quot;variable&quot;],div[class*=&quot;field&quot;]'; sel+=',[data-testid*=&quot;'+vn.toLowerCase()+'&quot;]'; var els=document.querySelectorAll(sel); for(var el of els){ var txt=(el.textContent||'').trim().toUpperCase(); if(txt===vn||txt.startsWith(vn+' ')||txt.startsWith(vn+':')||txt.endsWith(' '+vn)){ fillRow(el.closest('div[class*=&quot;row&quot;],div[class*=&quot;card&quot;],div[class*=&quot;item&quot;],li,tr,fieldset,section')||el.parentElement,vn,cfg); return; } } // Strategy 2: Look for inputs with matching data attributes var ins=document.querySelectorAll('main input[name],main input[data-variable],main input[data-env],main input[id]'); for(var inp of ins){ var attr=inp.getAttribute('name')||inp.getAttribute('data-variable')||inp.getAttribute('data-env')||inp.id; if(!attr)continue; var up=attr.toUpperCase(); if(up===vn||up.endsWith('_'+vn)){fillRow(inp.closest('div[class*=&quot;row&quot;],div[class*=&quot;card&quot;],div[class*=&quot;item&quot;],li,tr,fieldset,section')||inp.parentElement,vn,cfg);return;} } } function execFill(){ var main=document.querySelector('main')||document.body; for(var vn in d){if(d.hasOwnProperty(vn))tryFill(vn.toUpperCase(),d[vn]);} alert('Template auto-fill: '+f+' fields filled. If fields are missing, open template-editor-data.html for manual copy.'); } // MutationObserver waits for React to render form fields, then fills if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){ var obs=new MutationObserver(function(m){ var inpC=document.querySelectorAll('main input,main textarea').length; if(inpC>3){obs.disconnect();setTimeout(execFill,500);} }); obs.observe(document.body,{childList:true,subtree:true}); setTimeout(function(){obs.disconnect();execFill();},5000); });}else{ var obs2=new MutationObserver(function(m){ var inpC=document.querySelectorAll('main input,main textarea').length; if(inpC>3){obs2.disconnect();setTimeout(execFill,500);} }); obs2.observe(document.body,{childList:true,subtree:true}); setTimeout(function(){obs2.disconnect();execFill();},5000); } })();">📌 Drag me to bookmarks</a>
+<a class="bookmarklet-link" href="javascript:(function(){ var d={&quot;DB_TYPE&quot;: {&quot;defaultValue&quot;: &quot;postgres&quot;, &quot;description&quot;: &quot;Database engine: postgres for production, sqlite for local dev&quot;, &quot;isOptional&quot;: true}, &quot;PG_HOSTNAME&quot;: {&quot;defaultValue&quot;: &quot;localhost&quot;, &quot;description&quot;: &quot;Hostname for PG_HOSTNAME&quot;, &quot;isOptional&quot;: true}, &quot;PG_PORT&quot;: {&quot;defaultValue&quot;: &quot;5432&quot;, &quot;description&quot;: &quot;Port number for PG_PORT&quot;, &quot;isOptional&quot;: true}, &quot;PG_DATABASE&quot;: {&quot;defaultValue&quot;: &quot;railway&quot;, &quot;description&quot;: &quot;Pg Database&quot;, &quot;isOptional&quot;: true}, &quot;PG_USERNAME&quot;: {&quot;defaultValue&quot;: &quot;railway&quot;, &quot;description&quot;: &quot;Pg Username&quot;, &quot;isOptional&quot;: true}, &quot;PG_PASSWORD&quot;: {&quot;defaultValue&quot;: &quot;${{secret(32)}}&quot;, &quot;description&quot;: &quot;Password credential for PG_PASSWORD&quot;, &quot;isOptional&quot;: false}, &quot;KEYCLOAK_ADMIN_USERNAME&quot;: {&quot;defaultValue&quot;: &quot;admin&quot;, &quot;description&quot;: &quot;Keycloak Admin Username&quot;, &quot;isOptional&quot;: true}, &quot;KEYCLOAK_ADMIN_PASSWORD&quot;: {&quot;defaultValue&quot;: &quot;${{secret(32)}}&quot;, &quot;description&quot;: &quot;Password credential for KEYCLOAK_ADMIN_PASSWORD&quot;, &quot;isOptional&quot;: false}, &quot;KC_PROXY&quot;: {&quot;defaultValue&quot;: &quot;edge&quot;, &quot;description&quot;: &quot;Kc Proxy&quot;, &quot;isOptional&quot;: true}, &quot;KC_HTTP_ENABLED&quot;: {&quot;defaultValue&quot;: &quot;false&quot;, &quot;description&quot;: &quot;Kc Http Enabled&quot;, &quot;isOptional&quot;: true}, &quot;KEYCLOAK_HOSTNAME&quot;: {&quot;defaultValue&quot;: &quot;localhost&quot;, &quot;description&quot;: &quot;Hostname for KEYCLOAK_HOSTNAME&quot;, &quot;isOptional&quot;: true}, &quot;PORT&quot;: {&quot;defaultValue&quot;: &quot;8080&quot;, &quot;description&quot;: &quot;Port the service listens on inside the container&quot;, &quot;isOptional&quot;: true}}; var f=0;var s=new Set(); function setVal(inp,v){ var p=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value'); var t=Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value'); var setter=p&&p.set?p.set:(t&&t.set?t.set:null); if(setter){setter.call(inp,v);}else{inp.value=v;} inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true})); } function fillRow(row,vn,cfg){ var inputs=row.querySelectorAll('input:not([type=&quot;hidden&quot;]),textarea'); var dc=false,df=false; for(var inp of inputs){ if(s.has(inp))continue; var ph=(inp.placeholder||'').toLowerCase(); var al=(inp.getAttribute('aria-label')||'').toLowerCase(); var nm=(inp.name||'').toLowerCase(); var id=(inp.id||'').toLowerCase(); var lbl=''; var lp=(inp.closest&&inp.closest('label'))||(inp.id&&document.querySelector('label[for=&quot;'+inp.id+'&quot;]')); if(lp)lbl=lp.textContent.toLowerCase(); if(!lbl&&inp.closest){ var pa=inp.closest('div,li,fieldset,section'); if(pa){var nl=pa.querySelector('label,span[class*=&quot;label&quot;],div[class*=&quot;label&quot;],strong');if(nl)lbl=nl.textContent.toLowerCase();} } // Description field detection if(!dc&&cfg.description&&( ph.includes('desc')||al.includes('desc')||lbl.includes('desc')|| nm.includes('desc')||id.includes('desc') )){setVal(inp,cfg.description);s.add(inp);dc=true;f++;} // Default value field detection else if(!df&&cfg.defaultValue&&!cfg.defaultValue.startsWith('${{')&&( ph.includes('default')||ph.includes('value')||al.includes('default')|| al.includes('value')||lbl.includes('default')||lbl.includes('value')|| nm.includes('default')||nm.includes('value')||id.includes('default')||id.includes('value') )){setVal(inp,cfg.defaultValue);s.add(inp);df=true;f++;} // Ordinal fallback: first input=description, second=default else if(!dc&&cfg.description){setVal(inp,cfg.description);s.add(inp);dc=true;f++;} else if(!df&&cfg.defaultValue&&!cfg.defaultValue.startsWith('${{')){setVal(inp,cfg.defaultValue);s.add(inp);df=true;f++;} } } function tryFill(vn,cfg){ // Strategy 1: Find variable name in headings/labels var sel='h1,h2,h3,h4,h5,h6,label,strong,th,dt'; sel+=',span[class*=&quot;name&quot;],div[class*=&quot;name&quot;],div[class*=&quot;variable&quot;],div[class*=&quot;field&quot;]'; sel+=',[data-testid*=&quot;'+vn.toLowerCase()+'&quot;]'; var els=document.querySelectorAll(sel); for(var el of els){ var txt=(el.textContent||'').trim().toUpperCase(); if(txt===vn||txt.startsWith(vn+' ')||txt.startsWith(vn+':')||txt.endsWith(' '+vn)){ fillRow(el.closest('div[class*=&quot;row&quot;],div[class*=&quot;card&quot;],div[class*=&quot;item&quot;],li,tr,fieldset,section')||el.parentElement,vn,cfg); return; } } // Strategy 2: Look for inputs with matching data attributes var ins=document.querySelectorAll('main input[name],main input[data-variable],main input[data-env],main input[id]'); for(var inp of ins){ var attr=inp.getAttribute('name')||inp.getAttribute('data-variable')||inp.getAttribute('data-env')||inp.id; if(!attr)continue; var up=attr.toUpperCase(); if(up===vn||up.endsWith('_'+vn)){fillRow(inp.closest('div[class*=&quot;row&quot;],div[class*=&quot;card&quot;],div[class*=&quot;item&quot;],li,tr,fieldset,section')||inp.parentElement,vn,cfg);return;} } } function execFill(){ var main=document.querySelector('main')||document.body; for(var vn in d){if(d.hasOwnProperty(vn))tryFill(vn.toUpperCase(),d[vn]);} alert('Template auto-fill: '+f+' fields filled. If fields are missing, open template-editor-data.html for manual copy.'); } // MutationObserver waits for React to render form fields, then fills if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){ var obs=new MutationObserver(function(m){ var inpC=document.querySelectorAll('main input,main textarea').length; if(inpC>3){obs.disconnect();setTimeout(execFill,500);} }); obs.observe(document.body,{childList:true,subtree:true}); setTimeout(function(){obs.disconnect();execFill();},5000); });}else{ var obs2=new MutationObserver(function(m){ var inpC=document.querySelectorAll('main input,main textarea').length; if(inpC>3){obs2.disconnect();setTimeout(execFill,500);} }); obs2.observe(document.body,{childList:true,subtree:true}); setTimeout(function(){obs2.disconnect();execFill();},5000); } })();">📌 Drag me to bookmarks</a>
 <p class="desc">Drag this link to your browser bookmarks bar, then click it on the template editor page.</p>
 <table>
   <thead><tr>
@@ -65,8 +65,8 @@
 </tr>
 <tr>
   <td class="var-name">PG_HOSTNAME</td>
-  <td>Hostname or IP address of the PostgreSQL server to connect to.
-    <button class="copy-btn" onclick="copyText(this,'Hostname or IP address of the PostgreSQL server to connect to.')">Copy</button>
+  <td>Hostname for PG_HOSTNAME
+    <button class="copy-btn" onclick="copyText(this,'Hostname for PG_HOSTNAME')">Copy</button>
   </td>
   <td><code>localhost</code>
     <button class="copy-btn" onclick="copyText(this,'localhost')">Copy</button>
@@ -75,8 +75,8 @@
 </tr>
 <tr>
   <td class="var-name">PG_PORT</td>
-  <td>Port number for PostgreSQL server. Default: 5432
-    <button class="copy-btn" onclick="copyText(this,'Port number for PostgreSQL server. Default: 5432')">Copy</button>
+  <td>Port number for PG_PORT
+    <button class="copy-btn" onclick="copyText(this,'Port number for PG_PORT')">Copy</button>
   </td>
   <td><code>5432</code>
     <button class="copy-btn" onclick="copyText(this,'5432')">Copy</button>
@@ -85,8 +85,8 @@
 </tr>
 <tr>
   <td class="var-name">PG_DATABASE</td>
-  <td>Name of PostgreSQL database for Keycloak data storage.
-    <button class="copy-btn" onclick="copyText(this,'Name of PostgreSQL database for Keycloak data storage.')">Copy</button>
+  <td>Pg Database
+    <button class="copy-btn" onclick="copyText(this,'Pg Database')">Copy</button>
   </td>
   <td><code>railway</code>
     <button class="copy-btn" onclick="copyText(this,'railway')">Copy</button>
@@ -105,8 +105,8 @@
 </tr>
 <tr>
   <td class="var-name">PG_PASSWORD</td>
-  <td>Password for PostgreSQL user authentication (required).
-    <button class="copy-btn" onclick="copyText(this,'Password for PostgreSQL user authentication (required).')">Copy</button>
+  <td>Password credential for PG_PASSWORD
+    <button class="copy-btn" onclick="copyText(this,'Password credential for PG_PASSWORD')">Copy</button>
   </td>
   <td><code>${{secret(32)}}</code>
     <button class="copy-btn" onclick="copyText(this,'${{secret(32)}}')">Copy</button>
@@ -115,8 +115,8 @@
 </tr>
 <tr>
   <td class="var-name">KEYCLOAK_ADMIN_USERNAME</td>
-  <td>Initial admin username for master realm. Default: admin
-    <button class="copy-btn" onclick="copyText(this,'Initial admin username for master realm. Default: admin')">Copy</button>
+  <td>Keycloak Admin Username
+    <button class="copy-btn" onclick="copyText(this,'Keycloak Admin Username')">Copy</button>
   </td>
   <td><code>admin</code>
     <button class="copy-btn" onclick="copyText(this,'admin')">Copy</button>
@@ -125,8 +125,8 @@
 </tr>
 <tr>
   <td class="var-name">KEYCLOAK_ADMIN_PASSWORD</td>
-  <td>Initial password for admin user on first Keycloak startup only.
-    <button class="copy-btn" onclick="copyText(this,'Initial password for admin user on first Keycloak startup only.')">Copy</button>
+  <td>Password credential for KEYCLOAK_ADMIN_PASSWORD
+    <button class="copy-btn" onclick="copyText(this,'Password credential for KEYCLOAK_ADMIN_PASSWORD')">Copy</button>
   </td>
   <td><code>${{secret(32)}}</code>
     <button class="copy-btn" onclick="copyText(this,'${{secret(32)}}')">Copy</button>
@@ -135,8 +135,8 @@
 </tr>
 <tr>
   <td class="var-name">KC_PROXY</td>
-  <td>Proxy mode: edge (Railway), passthrough, or reencrypt
-    <button class="copy-btn" onclick="copyText(this,'Proxy mode: edge (Railway), passthrough, or reencrypt')">Copy</button>
+  <td>Kc Proxy
+    <button class="copy-btn" onclick="copyText(this,'Kc Proxy')">Copy</button>
   </td>
   <td><code>edge</code>
     <button class="copy-btn" onclick="copyText(this,'edge')">Copy</button>
@@ -145,8 +145,8 @@
 </tr>
 <tr>
   <td class="var-name">KC_HTTP_ENABLED</td>
-  <td>Enable/Disable plaintext HTTP listener (typically false for Railway)
-    <button class="copy-btn" onclick="copyText(this,'Enable/Disable plaintext HTTP listener (typically false for Railway)')">Copy</button>
+  <td>Kc Http Enabled
+    <button class="copy-btn" onclick="copyText(this,'Kc Http Enabled')">Copy</button>
   </td>
   <td><code>false</code>
     <button class="copy-btn" onclick="copyText(this,'false')">Copy</button>
@@ -155,8 +155,8 @@
 </tr>
 <tr>
   <td class="var-name">KEYCLOAK_HOSTNAME</td>
-  <td>Public hostname/URL users access Keycloak at (must match Railway domain)
-    <button class="copy-btn" onclick="copyText(this,'Public hostname/URL users access Keycloak at (must match Railway domain)')">Copy</button>
+  <td>Hostname for KEYCLOAK_HOSTNAME
+    <button class="copy-btn" onclick="copyText(this,'Hostname for KEYCLOAK_HOSTNAME')">Copy</button>
   </td>
   <td><code>localhost</code>
     <button class="copy-btn" onclick="copyText(this,'localhost')">Copy</button>
