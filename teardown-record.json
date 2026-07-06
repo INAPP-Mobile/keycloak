@@ -1,6 +1,6 @@
 {
   "slug": "railway-keycloak",
-  "template_code": "railway-keycloak-2",
-  "teardown_at": "2026-07-05T23:36:34.715499",
+  "template_code": "railway-keycloak",
+  "teardown_at": "2026-07-05T23:47:28.445422",
   "status": "completed"
 }
