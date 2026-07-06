@@ -6,52 +6,52 @@
   },
   "PG_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "PostgreSQL server hostname (localhost or Railway DB host)",
+    "description": "PostgreSQL server hostname for data persistence",
     "isOptional": true
   },
   "PG_PORT": {
     "defaultValue": "5432",
-    "description": "PostgreSQL port (default: 5432)",
+    "description": "PostgreSQL server port number (default: 5432)",
     "isOptional": true
   },
   "PG_DATABASE": {
     "defaultValue": "railway",
-    "description": "Name of PostgreSQL database for Keycloak",
+    "description": "PostgreSQL database name for Keycloak data (default: keycloak)",
     "isOptional": true
   },
   "PG_USERNAME": {
     "defaultValue": "railway",
-    "description": "Username for connecting to PostgreSQL database",
+    "description": "Username with access to Keycloak's database schema",
     "isOptional": true
   },
   "PG_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password for the Keycloak PostgreSQL user",
+    "description": "Password for the PostgreSQL database user account",
     "isOptional": false
   },
   "KEYCLOAK_ADMIN_USERNAME": {
     "defaultValue": "admin",
-    "description": "Initial admin username for Keycloak master realm (default: admin)",
+    "description": "Master realm initial admin username (default: admin)",
     "isOptional": true
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Initial admin password for Keycloak master realm (first startup)",
+    "description": "Master realm admin password for initial setup only",
     "isOptional": false
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Proxy mode: 'edge' for Railway TLS termination",
+    "description": "Proxy mode: edge, passthrough, or reencrypt (default: edge)",
     "isOptional": true
   },
   "KC_HTTP_ENABLED": {
     "defaultValue": "false",
-    "description": "Kc Http Enabled",
+    "description": "Enable HTTP listener (default: true; set false for HTTPS-only)",
     "isOptional": true
   },
   "KEYCLOAK_HOSTNAME": {
     "defaultValue": "localhost",
-    "description": "Public URL for accessing Keycloak (must match Railway domain)",
+    "description": "Public hostname URL for Keycloak access and tokens",
     "isOptional": true
   },
   "PORT": {
