@@ -1,0 +1,34 @@
+{
+  "KC_DB_URL": {
+    "value": "jdbc:postgresql://${{Postgres.HOST}}:${{Postgres.PORT}}/${{Postgres.NAME}}",
+    "description": "PostgreSQL JDBC connection URL. Auto-built from Railway Postgres companion service."
+  },
+  "KC_DB_USERNAME": {
+    "value": "${{Postgres.USER}}",
+    "description": "PostgreSQL database user. Auto-injected from Railway Postgres companion."
+  },
+  "KC_DB_PASSWORD": {
+    "value": "${{Postgres.PASSWORD}}",
+    "description": "PostgreSQL database password. Auto-injected from Railway Postgres companion."
+  },
+  "KEYCLOAK_ADMIN_PASSWORD": {
+    "value": "${{secret(32)}}",
+    "description": "Admin password for the Keycloak admin console. Auto-generated on first deploy."
+  },
+  "KEYCLOAK_HOSTNAME": {
+    "value": "",
+    "description": "Public hostname URL Keycloak generates links with (e.g., https://keycloak.yourdomain.com)."
+  },
+  "KC_PROXY": {
+    "value": "edge",
+    "description": "Proxy mode: edge (Railway HTTPS), passthrough, or reencrypt."
+  },
+  "KC_LOG_LEVEL": {
+    "value": "info",
+    "description": "Log level: info, debug, trace, warn, error, or fatal."
+  },
+  "PORT": {
+    "value": "8080",
+    "description": "Port Keycloak listens on inside the container."
+  }
+}

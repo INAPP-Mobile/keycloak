@@ -1,62 +1,42 @@
 {
-  "DB_TYPE": {
-    "defaultValue": "postgres",
-    "description": "Database engine: postgres for production, sqlite for local dev",
-    "isOptional": true
-  },
-  "PG_HOSTNAME": {
-    "defaultValue": "localhost",
-    "description": "Hostname for PG_HOSTNAME",
-    "isOptional": true
-  },
-  "PG_PORT": {
-    "defaultValue": "5432",
-    "description": "Port number for PG_PORT",
-    "isOptional": true
-  },
-  "PG_DATABASE": {
-    "defaultValue": "railway",
-    "description": "Pg Database",
-    "isOptional": true
-  },
-  "PG_USERNAME": {
-    "defaultValue": "railway",
-    "description": "Pg Username",
-    "isOptional": true
-  },
-  "PG_PASSWORD": {
-    "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for PG_PASSWORD",
+  "KC_DB_URL": {
+    "defaultValue": "jdbc:postgresql://${{Postgres.HOST}}:${{Postgres.PORT}}/${{Postgres.NAME}}",
+    "description": "PostgreSQL JDBC connection URL. Auto-built from Railway Postgres companion service.",
     "isOptional": false
   },
-  "KEYCLOAK_ADMIN_USERNAME": {
-    "defaultValue": "admin",
-    "description": "Keycloak Admin Username",
-    "isOptional": true
+  "KC_DB_USERNAME": {
+    "defaultValue": "${{Postgres.USER}}",
+    "description": "PostgreSQL database user. Auto-injected from Railway Postgres companion.",
+    "isOptional": false
+  },
+  "KC_DB_PASSWORD": {
+    "defaultValue": "${{Postgres.PASSWORD}}",
+    "description": "PostgreSQL database password. Auto-injected from Railway Postgres companion.",
+    "isOptional": false
   },
   "KEYCLOAK_ADMIN_PASSWORD": {
     "defaultValue": "${{secret(32)}}",
-    "description": "Password credential for KEYCLOAK_ADMIN_PASSWORD",
+    "description": "Admin password for the Keycloak admin console. Auto-generated on first deploy.",
     "isOptional": false
+  },
+  "KEYCLOAK_HOSTNAME": {
+    "defaultValue": "",
+    "description": "Public hostname URL Keycloak generates links with (e.g., https://keycloak.yourdomain.com).",
+    "isOptional": true
   },
   "KC_PROXY": {
     "defaultValue": "edge",
-    "description": "Kc Proxy",
+    "description": "Proxy mode: edge (Railway HTTPS), passthrough, or reencrypt.",
     "isOptional": true
   },
-  "KC_HTTP_ENABLED": {
-    "defaultValue": "false",
-    "description": "Kc Http Enabled",
-    "isOptional": true
-  },
-  "KEYCLOAK_HOSTNAME": {
-    "defaultValue": "localhost",
-    "description": "Hostname for KEYCLOAK_HOSTNAME",
+  "KC_LOG_LEVEL": {
+    "defaultValue": "info",
+    "description": "Log level: info, debug, trace, warn, error, or fatal.",
     "isOptional": true
   },
   "PORT": {
     "defaultValue": "8080",
-    "description": "Port the service listens on inside the container",
+    "description": "Port Keycloak listens on inside the container.",
     "isOptional": true
   }
 }
