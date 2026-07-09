@@ -1,0 +1,22 @@
+{
+  "POSTGRES_USER": {
+    "defaultValue": "keycloak",
+    "description": "PostgreSQL superuser name. Must match KC_DB_USERNAME on the Keycloak service.",
+    "isOptional": false
+  },
+  "POSTGRES_PASSWORD": {
+    "defaultValue": "keycloak_pw_2026",
+    "description": "PostgreSQL superuser password. Must match KC_DB_PASSWORD on the Keycloak service. Change both at once if updating.",
+    "isOptional": false
+  },
+  "POSTGRES_DB": {
+    "defaultValue": "keycloak",
+    "description": "Default database Keycloak connects to on first run.",
+    "isOptional": false
+  },
+  "PGDATA": {
+    "defaultValue": "/var/lib/postgresql/data",
+    "description": "PostgreSQL data directory. Must match the volume mount path configured in the postgres service settings (parent mount at /var/lib/postgresql).",
+    "isOptional": false
+  }
+}

@@ -1,9 +1,1 @@
-{
-  "postgres": {
-    "HOST": "KC_DB_URL",
-    "PORT": "KC_DB_URL",
-    "NAME": "KC_DB_URL",
-    "USER": "KC_DB_USERNAME",
-    "PASSWORD": "KC_DB_PASSWORD"
-  }
-}
+{}

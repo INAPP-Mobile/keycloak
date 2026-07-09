@@ -1,10 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" rx="24" fill="#1E1B4B"/>
-  <rect x="80" y="80" width="1040" height="470" rx="16" fill="#312E81" stroke="#4F46E5" stroke-width="2"/>
-  <!-- Keyhole graphic -->
-  <circle cx="600" cy="260" r="60" fill="#818CF8"/>
-  <rect x="570" y="300" width="60" height="100" rx="8" fill="#818CF8"/>
-  <!-- Title text -->
-  <text x="600" y="420" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Keycloak on Railway</text>
-  <text x="600" y="470" font-family="Arial, sans-serif" font-size="28" fill="#A5B4FC" text-anchor="middle">Open Source Identity &amp; Access Management</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#312E81" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" rx="24" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines for depth -->
+  <g opacity="0.08" stroke="#A5B4FC" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+  </g>
+
+  <!-- Decorative panel -->
+  <rect x="60" y="60" width="1080" height="510" rx="20" fill="url(#panel)" stroke="#4F46E5" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Large shield + keyhole graphic (left side) -->
+  <g transform="translate(280, 200)">
+    <!-- Outer shield -->
+    <path d="M0,-180 L140,-115 L140 50 Q140 145 0 210 Q-140 145 -140 50 L-140 -115 Z"
+          fill="url(#shield)" stroke="#C7D2FE" stroke-width="2" stroke-opacity="0.3"/>
+    <!-- Inner shield highlight -->
+    <path d="M0,-160 L120,-100 L120 45 Q120 130 0 185 Q-120 130 -120 45 L-120 -100 Z"
+          fill="none" stroke="#A5B4FC" stroke-width="1.5" stroke-opacity="0.5"/>
+    <!-- Keyhole circle -->
+    <circle cx="0" cy="-30" r="38" fill="#1E1B4B"/>
+    <!-- Keyhole stem -->
+    <path d="M-14,0 L-10,55 Q-10,62 -3,62 L3,62 Q10,62 10,55 L14,0 Z" fill="#1E1B4B"/>
+  </g>
+
+  <!-- Text content (right side / below shield) -->
+  <g font-family="'Inter','Segoe UI',Arial,sans-serif">
+    <text x="500" y="210" font-size="88" font-weight="800" fill="#FFFFFF">Keycloak</text>
+    <text x="500" y="265" font-size="32" font-weight="500" fill="#A5B4FC">on Railway</text>
+    <text x="500" y="350" font-size="28" font-weight="400" fill="#C7D2FE">Open-source identity &amp; access management</text>
+    <text x="500" y="390" font-size="22" font-weight="400" fill="#A5B4FC" opacity="0.85">SSO · OIDC · OAuth 2.0 · SAML 2.0</text>
+  </g>
+
+  <!-- Bottom badge / one-click deploy hint -->
+  <g transform="translate(500, 470)">
+    <rect x="0" y="0" width="280" height="56" rx="28" fill="#4F46E5" stroke="#A5B4FC" stroke-width="1.5"/>
+    <text x="140" y="36" font-family="'Inter','Segoe UI',Arial,sans-serif" font-size="22" font-weight="600" fill="#FFFFFF" text-anchor="middle">One-click deploy</text>
+  </g>
 </svg>
