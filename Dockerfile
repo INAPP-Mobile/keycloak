@@ -17,7 +17,7 @@
 #   matches POSTGRES_PASSWORD in the sibling's form. Users overriding the
 #   password MUST update both forms to keep them in sync.
 
-FROM keycloak/keycloak:26.7.4
+FROM keycloak/keycloak:26.8.0
 
 # Keycloak 26.x bootstrap admin env vars (replaces deprecated KEYCLOAK_ADMIN).
 # KC_BOOTSTRAP_ADMIN_PASSWORD is provided by the template form (default
